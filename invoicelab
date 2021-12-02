@@ -1,0 +1,67 @@
+package com.company;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        Scanner input = new Scanner(System.in);
+        ArrayList<String> products = new ArrayList<String>();
+        ArrayList<Double> prices = new ArrayList<Double>();
+
+        products.add("Bison Sweater");
+        prices.add(55.99);
+
+        products.add("Bison Tee");
+        prices.add(14.99);
+
+        products.add("Bison Hoodie");
+        prices.add(23.99);
+
+        products.add("Bison Bumpersticker");
+        prices.add(4.99);
+
+        String answer = "";
+        ArrayList<String> purchases = new ArrayList<String>();
+        do {
+            System.out.println("What do you want to do?");
+            System.out.println("1) add purchase 2) change purchase 3) show purchases 4) finish transaction");
+            answer = input.nextLine();
+
+            if (answer.equals("1")) {
+                System.out.println("What do you wish to buy?");
+                answer = input.nextLine();
+                purchases.add(answer);
+            } else if (answer.equals("2")) {
+                System.out.println("What purchase do you wish to change?");
+                String changes = input.nextLine();
+
+                //actually make the change
+                System.out.println("What do you wish to change it with?");
+                String change_item = input.nextLine();
+
+                purchases.set(purchases.indexOf(changes), change_item);
+            } else if (answer.equals("3")) {
+                for (int i = 0; i < purchases.size(); i++) {
+                    System.out.println(purchases.get(i));
+                }
+            }
+        }
+        while (!answer.equals("4"));
+
+        double total_cost = 0.0;
+        int j = 0;
+        for (int i = 0; i < purchases.size(); i++) {
+            j = 0;
+            do {
+                if (purchases.get(i).equals(products.get(j))) {
+                    total_cost = total_cost + prices.get(j);
+                }
+                j++;
+            } while (j < products.size());
+            System.out.println("Total Cost: " + total_cost);
+        }
+    }
+}
